@@ -1,10 +1,10 @@
 /*!
- * baobab-jsoneditor - version 0.1.0 (built: 2016-03-14)
+ * baobab-jsoneditor - version 0.2.3 (built: 2016-03-14)
  *
  *   A devtool UI widget that shows BaobabJS in a nicely formated JSON Editor
  *
  * git: https://github.com/dumconstantin/baobab-jsoneditor
- * Copyright © 2016, undefined
+ * Copyright © 2016, Constantin Dumitrescu <dum.constantin@gmail.com> (https://github.com/dumconstantin)
  * License: MIT
  */
 
@@ -52,18 +52,14 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!**********************************!*\
-  !*** ./src/baobab-jsoneditor.js ***!
-  \**********************************/
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var createJsonEditor = function createJsonEditor() {
-	  var el = document.getElementById('jsoneditor');
+	var createJsonEditor = function createJsonEditor(tree, container) {
 	  var ignoreNext = false;
 	  var options = {
 	    mode: 'form',
@@ -72,7 +68,7 @@
 	      tree.deepMerge(editor.get());
 	    }
 	  };
-	  var editor = new JSONEditor(el, options, tree.serialize());
+	  var editor = new JSONEditor(container, options, tree.serialize());
 	  tree.on('update', function (e) {
 	    if (ignoreNext == false) {
 	      editor.set(tree.serialize());
@@ -82,31 +78,57 @@
 	  });
 	};
 	
+	function ready(fn) {
+	  if (document.readyState != 'loading') {
+	    fn();
+	  } else {
+	    document.addEventListener('DOMContentLoaded', fn);
+	  }
+	}
+	
 	var baobabJsonEditor = function baobabJsonEditor(tree, opts) {
 	
-	  // Add JSONEditor dependencies
-	  $('body').append('<div id="jsoneditor" style="width: 400px; position: absolute; top: 10px; right: 10px;"></div>');
-	  $('head').append('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.css">');
-	  $('head').append('<script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.js"></script>');
+	  var containerId = 'baobab-jsoneditor';
+	  ready(function () {
+	
+	    var css = document.createElement('link');
+	    css.setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.css');
+	    css.setAttribute('rel', 'stylesheet');
+	    document.head.appendChild(css);
+	
+	    var jsonEditorDepsJs = document.createElement('script');
+	    jsonEditorDepsJs.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.js');
+	    document.head.appendChild(jsonEditorDepsJs);
+	
+	    var jsonEditorEl = document.createElement('div');
+	    jsonEditorEl.setAttribute('id', containerId);
+	    jsonEditorEl.setAttribute('style', 'width: 400px; position: absolute; top: 10px; right: 10px;');
+	    document.body.appendChild(jsonEditorEl);
+	  });
 	
 	  // Wait for JSONEditor to load
 	  var interval = setInterval(function () {
 	    if (typeof JSONEditor !== 'undefined') {
 	      clearInterval(interval);
-	      createJsonEditor();
+	      var container = document.getElementById(containerId);
+	      createJsonEditor(tree, container);
 	    }
-	  }, 500);
+	  }, 300);
 	
 	  // Module dispose logic
 	  if (module && module.hot) {
 	    module.hot.dispose(function (data) {
-	      $('#jsoneditor').remove();
+	      var el = document.getElementById('jsoneditor');
+	      el.parentNode.removeChild(el);
 	    });
 	  }
 	};
 	
-	exports.baobabJsonEditor = baobabJsonEditor;
-	exports.default = baobabJsonEditor;
+	if (window) {
+	  window.baobabJsonEditor = baobabJsonEditor;
+	}
+	
+	module.exports = baobabJsonEditor;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../~/webpack/buildin/module.js */ 1)(module)))
 
 /***/ },

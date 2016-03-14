@@ -8,16 +8,16 @@ module.exports = {
   devtool: '#source-map',
   output: {
     filename: '[name]-web.js',
-    path: 'build/',
+    path: require("path").resolve("./build"),
     pathinfo: true
   },
   entry: {
-    'bundle': `./src/${packageJson.name}.js`,
-    'bundle.min': `./src/${packageJson.name}.js`
+    'bundle': `./src/main.js`,
+    'bundle.min': `./src/main.js`
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
-      include: /\.min\.js$/,
+      include: /\.min\-web\.js$/,
       minimize: true
     }),
     new webpack.BannerPlugin(packageHeader, { raw: true })

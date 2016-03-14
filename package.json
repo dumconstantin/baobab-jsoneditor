@@ -1,6 +1,6 @@
 {
   "name": "baobab-jsoneditor",
-  "version": "0.1.0",
+  "version": "0.2.8",
   "description": "A devtool UI widget that shows BaobabJS in a nicely formated JSON Editor",
   "keywords": [
     "baobabjs",
@@ -14,8 +14,10 @@
   ],
   "scripts": {
     "test": "npm run build && ./node_modules/.bin/mocha --reporter spec",
+    "server": "node server.js",
     "build:web": "./node_modules/.bin/webpack",
     "build:node": "./node_modules/.bin/gulp build && rm ./src/bundle.js",
+    "build": "rm -rf build && npm run build:web && npm run build:node",
     "docs": "./node_modules/.bin/jsdoc -c jsdoc.conf.js",
     "push-docs": "npm run docs && mv docs docs.bkp && git checkout gh-pages && rm -rf docs && mv docs.bkp docs && git commit docs/* -m \"Add docs\" && git push && git checkout master"
   },
@@ -25,9 +27,7 @@
     "url": "https://github.com/dumconstantin/baobab-jsoneditor"
   },
   "homepage": "https://github.com/dumconstantin/baobab-jsoneditor",
-  "authors": [
-    "Constantin Dumitrescu <dum.constantin@gmail.com> (https://github.com/dumconstantin)"
-  ],
+  "author": "Constantin Dumitrescu <dum.constantin@gmail.com> (https://github.com/dumconstantin)",
   "license": "MIT",
   "private": false,
   "readmeFilename": "README.md",
@@ -46,11 +46,16 @@
     "gulp-babel": "6.1.2",
     "gulp-header": "1.7.1",
     "gulp-sourcemaps": "1.6.0",
+    "html-webpack-plugin": "2.10.0",
     "jsdoc": "3.4.0",
     "minami": "1.1.1",
     "mocha": "2.4.5",
     "package-header": "1.1.0",
     "webpack": "1.12.14",
-    "webpack-append": "0.1.2"
-  }
+    "webpack-append": "0.1.2",
+    "webpack-config": "4.0.0",
+    "webpack-dev-middleware": "1.5.1",
+    "webpack-dev-server": "1.14.1"
+  },
+  "dependencies": {}
 }
