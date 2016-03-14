@@ -1,9 +1,10 @@
-/*
- * Baobab-JsonEditor
+/*!
+ * baobab-jsoneditor - version 0.1.0 (built: 2016-03-14)
  *
- * Homepage: https://github.com/dumconstantin/baobab-jsoneditor
- * Version: 0.1.0
- * Author: dumconstantin (Dumitrescu Constantin)
+ *   A devtool UI widget that shows BaobabJS in a nicely formated JSON Editor
+ *
+ * git: https://github.com/dumconstantin/baobab-jsoneditor
+ * Copyright © 2016, undefined
  * License: MIT
  */
 'use strict';

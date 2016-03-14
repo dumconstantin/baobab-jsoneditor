@@ -6,8 +6,9 @@ var path = require('path')
 var fs = require('fs')
 var camelCase = require('camelcase')
 var header = require('gulp-header')
+var packageHeader = require('package-header').build(require('./package.json'))
+
 var bundleFileName = 'bundle'
-var packageJson = require('./package.json')
 
 gulp.task('bundle', function (done) {
   var files = glob.sync('./src/**/*.js')
@@ -47,14 +48,7 @@ gulp.task('compile', function () {
     .pipe(babel({
       presets: ['es2015']
     }))
-    .pipe(header(`/*
- * Baobab-JsonEditor
- *
- * Homepage: https://github.com/dumconstantin/baobab-jsoneditor
- * Version: ${packageJson.version}
- * Author: dumconstantin (Dumitrescu Constantin)
- * License: MIT
- */\n`))
+    .pipe(header(packageHeader))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('build/'))
 })

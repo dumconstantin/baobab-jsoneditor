@@ -1,5 +1,6 @@
-const webpack = require('webpack')
-const packageJson = require('./package.json')
+var webpack = require('webpack')
+var packageJson = require('./package.json')
+var packageHeader = require('package-header').build(require('./package.json'))
 
 module.exports = {
   filename: __filename,
@@ -18,7 +19,8 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
       minimize: true
-    })
+    }),
+    new webpack.BannerPlugin(packageHeader, { raw: true })
   ],
   module: {
     loaders: [
