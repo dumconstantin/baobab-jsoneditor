@@ -1,17 +1,18 @@
 const webpack = require('webpack')
+const packageJson = require('./package.json')
 
 module.exports = {
   filename: __filename,
   debug: true,
   devtool: '#source-map',
   output: {
-    filename: '[name].js',
-    path: 'dist/',
+    filename: '[name]-web.js',
+    path: 'build/',
     pathinfo: true
   },
   entry: {
-    'bundle': './src/entry.js',
-    'bundle.min': './src/entry.js'
+    'bundle': `./src/${packageJson.name}.js`,
+    'bundle.min': `./src/${packageJson.name}.js`
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
