@@ -32,7 +32,7 @@ const baobabJsonEditor = (tree, opts) => {
   ready(() => {
     var el =  document.getElementById(containerId)
     if (el) {
-      el.parent().removeChild(el)
+      el.parentNode.removeChild(el)
     }
 
     var css = document.createElement('link')
