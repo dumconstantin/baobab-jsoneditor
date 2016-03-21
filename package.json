@@ -1,6 +1,6 @@
 {
   "name": "baobab-jsoneditor",
-  "version": "0.2.9",
+  "version": "0.2.11",
   "description": "A devtool UI widget that shows BaobabJS in a nicely formated JSON Editor",
   "keywords": [
     "baobabjs",

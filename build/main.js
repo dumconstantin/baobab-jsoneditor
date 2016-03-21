@@ -1,5 +1,5 @@
 /*!
- * baobab-jsoneditor - version 0.2.3 (built: 2016-03-14)
+ * baobab-jsoneditor - version 0.2.11 (built: 2016-03-21)
  *
  *   A devtool UI widget that shows BaobabJS in a nicely formated JSON Editor
  *
@@ -39,7 +39,12 @@ function ready(fn) {
 var baobabJsonEditor = function baobabJsonEditor(tree, opts) {
 
   var containerId = 'baobab-jsoneditor';
+
   ready(function () {
+    var el = document.getElementById(containerId);
+    if (el) {
+      el.parent().removeChild(el);
+    }
 
     var css = document.createElement('link');
     css.setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.css');

@@ -28,9 +28,14 @@ function ready(fn) {
 const baobabJsonEditor = (tree, opts) => {
 
   var containerId = 'baobab-jsoneditor'
-  ready(() => {
 
-     var css = document.createElement('link')
+  ready(() => {
+    var el =  document.getElementById(containerId)
+    if (el) {
+      el.parent().removeChild(el)
+    }
+
+    var css = document.createElement('link')
     css.setAttribute('href','https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.css')
     css.setAttribute('rel', 'stylesheet')
     document.head.appendChild(css)
