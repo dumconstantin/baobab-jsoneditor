@@ -1,5 +1,5 @@
 /*!
- * baobab-jsoneditor - version 0.2.12 (built: 2016-03-21)
+ * baobab-jsoneditor - version 0.2.14 (built: 2016-03-24)
  *
  *   A devtool UI widget that shows BaobabJS in a nicely formated JSON Editor
  *
@@ -19,9 +19,75 @@ var createJsonEditor = function createJsonEditor(tree, container) {
     }
   };
   var editor = new JSONEditor(container, options, tree.serialize());
+
+  var sync = true;
+
+  var expandButton = container.querySelector('.jsoneditor-expand-all');
+  expandButton.parentNode.removeChild(expandButton);
+  var collapseButton = container.querySelector('.jsoneditor-collapse-all');
+  collapseButton.parentNode.removeChild(collapseButton);
+
+  var menu = document.querySelector('.jsoneditor-menu');
+
+  var syncButton = document.createElement('div');
+  syncButton.setAttribute('style', '\n        float: left;\n        padding: 7px;\n        text-transform: uppercase;\n        cursor: pointer;\n        font-family: Helvetica, Arial;\n        font-size: 15px;\n        background: #88C425;\n        color: #FEFEFE;\n        font-weight: bold;\n    ');
+  syncButton.innerText = 'Sync';
+  syncButton.dataset.sync = sync;
+  syncButton.addEventListener('click', function (e) {
+    if (syncButton.dataset.sync === 'true') {
+      syncButton.dataset.sync = false;
+      syncButton.style.background = '#E3342D';
+      sync = false;
+    } else {
+      syncButton.dataset.sync = true;
+      syncButton.style.background = '#88C425';
+      sync = true;
+      editor.set(tree.serialize());
+    }
+  });
+
+  container.style.background = 'white';
+  menu.style.cursor = 'move';
+  menu.style.position = 'relative';
+  menu.style.zIndex = '10';
+
+  var el = container;
+  var mover = false,
+      x,
+      y,
+      posx,
+      posy,
+      first = true;
+  el.onmousedown = function (e) {
+    if (e.target.getAttribute('class') === 'jsoneditor-menu') {
+      mover = true;
+    }
+  };
+  el.onmouseup = function () {
+    mover = false;
+    first = true;
+  };
+  el.onmousemove = function (e) {
+    if (mover) {
+      if (first) {
+        x = e.offsetX;
+        y = e.offsetY;
+        first = false;
+      }
+      posx = e.pageX - x;
+      posy = e.pageY - y;
+      this.style.left = posx + 'px';
+      this.style.top = posy + 'px';
+    }
+  };
+
+  menu.insertBefore(syncButton, menu.firstChild);
+
   tree.on('update', function (e) {
     if (ignoreNext == false) {
-      editor.set(tree.serialize());
+      if (sync) {
+        editor.set(tree.serialize());
+      }
     } else {
       ignoreNext = false;
     }
