@@ -1,5 +1,5 @@
 /*!
- * baobab-jsoneditor - version 0.2.14 (built: 2016-03-24)
+ * baobab-jsoneditor - version 0.2.15 (built: 2016-04-11)
  *
  *   A devtool UI widget that shows BaobabJS in a nicely formated JSON Editor
  *

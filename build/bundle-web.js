@@ -1,5 +1,5 @@
 /*!
- * baobab-jsoneditor - version 0.2.14 (built: 2016-03-24)
+ * baobab-jsoneditor - version 0.2.15 (built: 2016-04-11)
  *
  *   A devtool UI widget that shows BaobabJS in a nicely formated JSON Editor
  *
@@ -163,12 +163,12 @@
 	    }
 	
 	    var css = document.createElement('link');
-	    css.setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.css');
+	    css.setAttribute('href', 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.4.0/jsoneditor.css');
 	    css.setAttribute('rel', 'stylesheet');
 	    document.head.appendChild(css);
 	
 	    var jsonEditorDepsJs = document.createElement('script');
-	    jsonEditorDepsJs.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.js');
+	    jsonEditorDepsJs.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.4.0/jsoneditor.js');
 	    document.head.appendChild(jsonEditorDepsJs);
 	
 	    var jsonEditorEl = document.createElement('div');

@@ -107,12 +107,12 @@ const baobabJsonEditor = (tree, opts) => {
       }
 
     var css = document.createElement('link')
-      css.setAttribute('href','https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.css')
+      css.setAttribute('href','https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.4.0/jsoneditor.css')
       css.setAttribute('rel', 'stylesheet')
       document.head.appendChild(css)
 
       var jsonEditorDepsJs = document.createElement('script')
-      jsonEditorDepsJs.setAttribute('src','https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.1.5/jsoneditor.js')
+      jsonEditorDepsJs.setAttribute('src','https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.4.0/jsoneditor.js')
       document.head.appendChild(jsonEditorDepsJs)
 
       var jsonEditorEl = document.createElement('div')
